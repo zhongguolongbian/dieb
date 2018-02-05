@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>饿了么</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.css">
+    <script src="jquery/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ejs.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $.ajax({
+            url:"https://www.ele.me/restapi/shopping/restaurants?extras[]=activities&geohash=ww0vsd0h80y&latitude=34.72856&limit=24&longitude=113.75245&offset=24&terminal=web",
+            type:"GET",
+            dataType:"json",
+            success:function (data) {
+                bindHTML(data);
+                // console.log(data)
+            },
+        });
+        function bindHTML(data) {
+            var str = $("#menuTemplate").html();
+
+            var result = ejs.render(str,{data:data});
+
+            $(".formal").html(result);
+
+            $(".species-div1").mouseover(function () {
+                var index = $(this).index();
+                $(".degang").eq(index).removeClass('hide');
+                $(".species-div2-right-div").eq(index).css("color","#0089dc")
+                $(".species-div1").eq(index).css('background','lightgrey')
+            })
+            $(".species-div1").mouseout(function () {
+                var index = $(this).index();
+                $(".degang").eq(index).addClass('hide')
+                $(".species-div2-right-div").eq(index).css("color","")
+                $(".species-div1").eq(index).css('background','')
+
+            })
+
+            $(".degang-div").mouseover(function () {
+                var index = $(this).index();
+                $(".degang").eq(index).addClass('hide')
+            })
+            $(".degang-div").mouseout(function () {
+                var index = $(this).index();
+                $(".degang").eq(index).addClass('hide')
+            })
+
+        }
+    </script>
+<body>
+    <main>
+        <div class="logo">
+            <!--导航-->
+            <div class="logo1">
+                <div class="logo-left">
+                  <ul class="logo-left-ul">
+                      <li><img src="img/logo.png" alt=""></li>
+                      <li><a href="">首页</a></li>
+                      <li><a href="">我的订单</a></li>
+                      <li><a href="">加盟合作</a></li>
+                  </ul>
+              </div>
+                <div class="logo-right" >
+                    <ul class="logo-right-ul">
+                        <li><a href="">规则中心</a></li>
+                        <li><a href=""><i class="fa fa-mobile" aria-hidden="true"></i></span>手机应用</a></li>
+                        <li><a href=""><i class="fa fa-user-o" aria-hidden="true"></i>登录/注册</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--定位-->
+            <div class="logo-location hide">
+                <h4 style="line-height: 20px"><b>扫一扫, 手机订餐更方便</b></h4>
+                <img src="//shadow.elemecdn.com/faas/desktop/media/img/appqc.95e532.png" alt="">
+            </div>
+            <!--位置选择-->
+            <div class="selection">
+                <div class="selection-left">
+                    <span>当前位置:</span>
+                    <span>管城河南省通信产业园(...</span>
+                    <span><a href="">[切换地址]</a></span>
+                </div>
+                <div class="selection-right">
+                    <input type="text" placeholder="搜索商家,美食...">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="baby">
+                <!--扒手-->
+                <div class="shoplifter">
+                    <div class="shoplifter-right">
+                        <img src="//shadow.elemecdn.com/faas/desktop/media/img/takeout.408a87.png" alt="">
+                    </div>
+                </div>
+                <!--分类-->
+                <div class="classify">
+                    <div class="classify-left">
+                        <span>商家分类:</span>
+                    </div>
+                    <div class="classify-right">
+                        <ul class="classify-right-ul">
+                            <li> <a href="">全部商家</a></li>
+                            <li> <a href="">美食</a></li>
+                            <li><a href="">快餐便当</a></li>
+                            <li> <a href="">特色菜系</a></>
+                            <li><a href="">异国料理</a></li>
+                            <li><a href="">小吃夜宵</a></li>
+                            <li> <a href="">甜品饮品</a></li>
+                            <li> <a href="">果蔬生鲜</a></li>
+                            <li><a href="">商店超市</a></li>
+                            <li> <a href="">鲜花绿植</a></li>
+                            <li><a href="">医药健康</a></li>
+                            <li><a href="">早餐</a></li>
+                            <li><a href="">午餐</a></li>
+                            <li><a href="">下午茶</a></li>
+                            <li><a href="">晚餐</a></li>
+                            <li> <a href="">夜宵</a></li>
+                        </ul>
+
+
+                    </div>
+                </div>
+                <!--种类-->
+                <section class="formal">
+
+                </section>
+                <!--底部-->
+                <div>
+                    <div class="bottom">
+                        <div class="bottom1">
+                            <div class="bottom1-left">
+                                <ul class="bottom1-left-ul">
+                                    <li>用户帮助</li>
+                                    <li>常见问题</li>
+                                </ul>
+                                <ul class="bottom1-left-ul">
+                                    <li>商务合作</li>
+                                    <li>我要开店</li>
+                                    <li>加盟指南</li>
+                                    <li>市场合作</li>
+                                    <li>开放平台</li>
+                                </ul>
+                                <ul class="bottom1-left-ul">
+                                    <li>关于我们</li>
+                                    <li>饿了么介绍</li>
+                                    <li>加入我们</li>
+                                    <li>联系我们</li>
+                                    <li>规则中心</li>
+                                </ul>
+                            </div>
+                            <div class="bottom1-right">
+                                <div class="depauw">
+                                    <p>24小时客服热线 : 10105757</p>
+                                    <p>关注我们 :<i class="fa fa-weixin" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i class="fa fa-weibo"></i></p>
+                                </div>
+                                <div class="depauw-right">
+                                    <div class="depauw-img">
+                                        <img src="//shadow.elemecdn.com/faas/desktop/media/img/appqc.95e532.png" alt="">
+                                    </div>
+                                    <div class="depauw-character">
+                                        <h3>下载手机版</h3>
+                                        <p>扫一扫,手机订餐方便</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="bottom2">
+                        <div class="bottom2-top">
+                            <h5>所有方：上海拉扎斯信息科技有限公司</h5>
+                        </div>
+                        <div class="bottom2-center">
+                            <span>增值电信业务许可证 : </span>
+                            <span><a href="">沪B2-20150033</a></span>
+                            <span><a href="">沪ICP备 09007032</a></span>
+                            <span><a href="">上海工商行政管理</a></span>
+                            <span> Copyright ©2008-2017 ele.me, All Rights Reserved.</span>
+                        </div>
+                        <div class="bottom2-bottom">
+                            <img src="//shadow.elemecdn.com/faas/desktop/media/img/picp_bg.e373b3.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script charset="UTF-8"  type="text/template" id="menuTemplate">
+        <div class="species">
+            <% if (data && data.length > 0){ %>
+            <%data.forEach(function(curData,index){%>
+                                <div class="species-div1">
+                                    <% var cName = index === 0?'bg':null;%>
+                                    <div class="species-div2">
+                                        <div class="species-div2-left">
+                                            <img src="https://fuss10.elemecdn.com/<%=curData.image_path %>.<%= curData.image_path.substr(32)%>?imageMogr2/thumbnail/140x140" alt="" >
+                                            <p><%= curData.order_lead_time %>分钟 </p>
+                                        </div>
+                                        <div class="species-div2-right">
+                                            <div class="species-div2-right-div"><b><%= curData.name %></b></div>
+                                            <div>
+                                                <span>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span>
+                                                月售<%= curData.distance %>单
+                                                </span>
+                                            </div>
+                                            <div>
+                                                配送费￥ <%= curData.float_delivery_fee %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="degang hide">
+                                        <div class="degang-div">
+                                            <div class=" degang-div2">
+                                               <h4><b><%= curData.name %></b></h4>
+                                            </div>
+                                            <div class="degang-div3">
+                                                <span>
+                                                     配送费￥ <%= curData.float_delivery_fee %>
+                                                </span>
+                                                <span>
+                                                    平均<%= curData.order_lead_time %>分钟送达
+                                                </span>
+                                            </div>
+                                            <div class=" degang-div4"></div>
+                                            <div class=" degang-div5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                             <% }); %>
+                             </div>
+                          <% } %>
+    </script>
+
+</body>
+</html>

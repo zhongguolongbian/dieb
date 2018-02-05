@@ -1,0 +1,143 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+    <!--<script src="js/ejs.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div style="width: 200px;height: 100px;">-->
+   <!--<p> 00000000000000000000000000000000000000000000000000000</p>-->
+<!--</div>-->
+    <!--<section>-->
+
+    <!--</section>-->
+<!--<script type="text/html" id="demo">-->
+        <!--<div>-->
+            <!--<h1>这是内容显示</h1>-->
+            <!--<h2>姓名是：<%= name %></h2>-->
+            <!--<ul>-->
+                <!--<% for (var i = 0; i < stus.length; i++){ %>-->
+                <!--<li>姓名是：<%= stus[i].name %></li>-->
+                <!--<% } %>-->
+            <!--</ul>-->
+        <!--</div>-->
+<!--</script>-->
+    <!--<script>-->
+        <!--var data = {-->
+            <!--name:'wang',-->
+            <!--age: 10,-->
+            <!--stus:[-->
+                <!--{-->
+                    <!--name:'张三',-->
+                <!--},-->
+                <!--{-->
+                    <!--name:'李四'-->
+                <!--},-->
+            <!--]-->
+        <!--}-->
+
+        <!--var str = document.getElementById('demo').innerHTML;-->
+        <!--// console.log(stus)-->
+        <!--document.querySelector('section').innerHTML = ejs.render(str,data);-->
+    <!--</script>-->
+<!--</body>-->
+<!--</html>-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="aplus-terminal" content="1">
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <meta name="format-detection" content="telephone=no, address=no">
+
+    <title>title</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <style type="text/css">
+        .main{
+            text-align: center;
+        }
+        .item{
+            width: 224px;
+            margin: 10px;
+            display: inline-block;
+        }
+        .item img{
+            width: 100%;
+        }
+        .price{
+            color: red;
+            display: flex;
+            justify-content: space-between;
+        }
+        .title{
+            width: 100%;
+            text-align: left;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+
+</div>
+<button class="btn btn-success more">加载更多</button>
+<script type="text/javascript">
+    let [page, jQuery112409721827272010266_1489999092199] = [3, ''];
+    let =  dataUrl = `http://mce.meilishuo.com/jsonp/get/3?callback=jQuery112409721827272010266_1489999092199&offset=0&frame=8&trace=0&limit=10&endId=0&pid=38369&page=${page}&_=1489999092221`
+    //初始化页面数据
+    if (document.body.scrollHeight === window.innerHeight) {
+        askData(dataUrl);
+    }
+    //点击加载更多
+    $('.more').on('click', function () {
+        askData(dataUrl);
+    })
+
+
+
+
+    //滚动加载
+    window.onscroll = function () {
+        page++
+        var height = document.body.scrollHeight - document.body.scrollTop - window.innerHeight
+        if (height < 400 && page%3 === 0) {
+            askData(dataUrl);
+        }
+    }
+
+
+
+    //异步请求数据
+    function askData(url) {
+        $.ajax({
+            type:"get",
+            url: url,
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            async:true,
+            success: function (res) {
+                loadDOM(res.data.list);
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    }
+    //加载数据到页面
+    function loadDOM (data) {
+        for (let i in data) {
+            let html =``;
+            $(html).appendTo('.main')
+        }
+    }
+</script>
+</body>
+</html>
